@@ -12,36 +12,10 @@ import java.nio.file.Paths;
 //escrita resultados.csv
 public class App {
 
-    /*
-    * @Ler audiovisuais
-    * Lê todos os dados de audiovisuais e escreve a quantidade de itens carregados com sucesso no formato: 1;quantidade de itens carregados
-    */
-    public boolean leAudioVisuais() {
-        
-        Path path = Paths.get("./data/dados.csv");
-        
-        try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
-            String line = null;
-            int itensCarregados = 0;
-            String[] console;
-
-            while ((line = reader.readLine()) != null) {
-                //console = line.split(";");
-                System.out.println(line);
-                itensCarregados++;
-            }
-            
-            return false;
-        }
-        catch (IOException e) {
-            System.err.format("Erro de E/S: %s%n", e);
-            return false;
-        }
-    }
-
     public void executa() {
         
-        leAudioVisuais();
+        Acervo acervo = new Acervo();
+        acervo.carregaAudioVisuais();
 
          /*
          * @Escrever informações dos itens
