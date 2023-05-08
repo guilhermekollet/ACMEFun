@@ -1,6 +1,6 @@
 abstract class AudioVisual implements Cobravel {
-    String titulo;
-    double precoBase;
+    private String titulo;
+    private double precoBase;
 
     @Override
     public double calculaPrecoVenda() {
@@ -12,6 +12,10 @@ abstract class AudioVisual implements Cobravel {
     public double calculaImposto() {
         
         return 0.0;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 
     
