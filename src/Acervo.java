@@ -1,3 +1,13 @@
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Acervo {
 
     public Acervo() {
@@ -8,11 +18,11 @@ public class Acervo {
     * @Ler audiovisuais
     * Lê todos os dados de audiovisuais e escreve a quantidade de itens carregados com sucesso no formato: 1;quantidade de itens carregados
     */
-    public void carregaAudioVisuais() {
+    public void lerAudioVisuais() {
         System.out.println("Carregando audiovisuais...");
 
-        AudioVisual a1 = new Game();
-        AudioVisual a2 = new BluRay();
+        AudioVisual a1 = new Game("GTA V", 100.0, "ACAO");
+        AudioVisual a2 = new BluRay("O Poderoso Chefão", 50.0, 180);
 
         System.out.println(
             "Preço de venda do game: " + a1.calculaPrecoVenda() + "\n" +
@@ -21,26 +31,46 @@ public class Acervo {
             "Imposto do blu-ray: " + a2.calculaImposto() + "\n"
         );
 
-        /*
-         Path path = Paths.get("./data/dados.csv");
+        Path path = Paths
+        .get("D:\\Development\\Java Learn\\TP2\\App\\data\\dados.csv");
         
-        try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
+        try(BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
+            
             String line = null;
             int itensCarregados = 0;
+            int itensNaoCarregados = 0;
             String[] console;
 
+            AudioVisual a;
+
             while ((line = reader.readLine()) != null) {
-                //console = line.split(";");
-                System.out.println(line);
-                itensCarregados++;
+                console = line.split(";");
+
+                //verifica se o quarto campo é um número
+                if(console[2].equals("1")) {
+                    a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
+                    System.out.println("BluRay criado com sucesso!");
+                    itensCarregados++;
+                }
+                else if(console[2].equals("2")){
+                    a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
+                    System.out.println("Game criado com sucesso!");
+                    itensCarregados++;
+                } 
+                else {
+                    System.out.println("Erro ao cadastrar item!");
+                    itensNaoCarregados++;
+                }
             }
+
+            System.out.println("Quantidade de itens carregados: " + itensCarregados);
+            System.out.println("Quantidade de itens não carregados: " + itensNaoCarregados);
             
-            return false;
         }
         catch (IOException e) {
             System.err.format("Erro de E/S: %s%n", e);
-            return false;
+
         }
-         */
+         
     }
 }

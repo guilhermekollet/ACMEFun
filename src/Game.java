@@ -1,8 +1,13 @@
 public class Game extends AudioVisual {
     String categoria;
 
-    //Categoria ACAO;
-
+    Game(String titulo, double precoBase, String categoria) {
+        System.out.println("Criando game...");
+        this.titulo = titulo;
+        this.precoBase = precoBase;
+        this.categoria = categoria;
+    }
+    
     @Override
     public double calculaPrecoVenda()  {
         

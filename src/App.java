@@ -8,14 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//leitura dados.csv
-//escrita resultados.csv
 public class App {
 
     public void executa() {
         
         Acervo acervo = new Acervo();
-        acervo.carregaAudioVisuais();
+
+        //@Ler audiovisuais
+        acervo.lerAudioVisuais();
 
          /*
          * @Escrever informações dos itens
