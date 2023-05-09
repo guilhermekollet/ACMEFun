@@ -21,8 +21,7 @@ public class Acervo {
     public void lerAudioVisuais() {
         System.out.println("Carregando audiovisuais...");
 
-        Path path = Paths
-        .get("./data/dados.csv");
+        Path path = Paths.get("./ACMEFun/data/dados.csv");
         
         try(BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
             
@@ -59,7 +58,7 @@ public class Acervo {
             System.out.println("Quantidade de itens não carregados: " + itensNaoCarregados);
             
             try {
-                FileWriter writer = new FileWriter("./data/resultado.csv");
+                FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv");
                 writer.write("1," + itensCarregados);
                 writer.close();
                 System.out.println("Dados escritos com sucesso no arquivo.");
