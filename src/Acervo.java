@@ -84,7 +84,7 @@ public class Acervo {
         System.out.println("Carregando audiovisuais...");
 
         Path path = Paths
-        .get("./data/dados.csv");
+        .get("./ACMEFun/data/dados.csv");
 
         try(BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
             
@@ -106,6 +106,18 @@ public class Acervo {
                         a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
                         System.out.println("BluRay criado com sucesso!");
 
+                        try {
+                            FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv", true);
+                            
+                            writer.write("2," + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto());
+                            writer.close();
+                            System.out.println("Dados escritos com sucesso no arquivo.");
+                            
+                        } catch (IOException e) {
+                            System.out.println("Erro ao escrever no arquivo.");
+                            e.printStackTrace();
+                        }
+
                     }
 
                     else if(console[2].equals("2")) {
@@ -113,19 +125,21 @@ public class Acervo {
                         a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
                         System.out.println("Game criado com sucesso!");
 
+                        try {
+                            FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv", true);
+                            
+                            writer.write("2," + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto());
+                            writer.close();
+                            System.out.println("Dados escritos com sucesso no arquivo.");
+                            
+                        } catch (IOException e) {
+                            System.out.println("Erro ao escrever no arquivo.");
+                            e.printStackTrace();
+                        }
+
                     }
 
-                    try {
-                        FileWriter writer = new FileWriter("./data/resultado.csv", true);
-                        
-                        writer.write("2," + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto());
-                        writer.close();
-                        System.out.println("Dados escritos com sucesso no arquivo.");
-                        
-                    } catch (IOException e) {
-                        System.out.println("Erro ao escrever no arquivo.");
-                        e.printStackTrace();
-                    }
+                    
                         
                 } else {
                     System.out.println("Erro ao cadastrar item!");

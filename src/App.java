@@ -11,6 +11,7 @@ public class App {
          * @Escrever informações dos itens
          * escreve algumas informações para cada item carregado com sucesso no sistema, no formato: 2;título;valor do preço final;valor do imposto
          */
+        acervo.escreverInfomacoesIens();
 
          /*
          * @Escrever quantos games RPG foram cadastrados
