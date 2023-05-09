@@ -2,9 +2,8 @@ public class Game extends AudioVisual {
     String categoria;
 
     Game(String titulo, double precoBase, String categoria) {
+        super(titulo, precoBase);
         System.out.println("Criando game...");
-        this.titulo = titulo;
-        this.precoBase = precoBase;
         this.categoria = categoria;
     }
     
@@ -18,19 +17,19 @@ public class Game extends AudioVisual {
         */
 
         if (this.categoria == "ACAO") {
-            return (this.precoBase * 1.2);
+            return (getPrecoBase() * 1.2);
         }
         else if (this.categoria == "ESPORTE") {
-            return (this.precoBase * 1.3);
+            return (getPrecoBase() * 1.3);
         }
         else if (this.categoria == "ESTRATEGIA") {
-            return (this.precoBase * 1.4);
+            return (getPrecoBase() * 1.4);
         }
         else if (this.categoria == "SIMULACAO") {
-            return (this.precoBase * 1.5);
+            return (getPrecoBase() * 1.5);
         }
         else if (this.categoria == "RPG") {
-            return (this.precoBase * 1.7);
+            return (getPrecoBase() * 1.7);
         }
         else {
             return 0.0;

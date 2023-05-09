@@ -1,16 +1,15 @@
 public class BluRay extends AudioVisual {
-    int duracao; //minutos
+    private int duracao; //minutos
 
     BluRay(String titulo, double precoBase, int duracao) {
-        System.out.println("Criando blu-ray...");
-        this.titulo = titulo;
-        this.precoBase = precoBase;
+        super(titulo, precoBase);
+        System.out.println("Criando BluRay...");
         this.duracao = duracao;
     }
 
     @Override
     public double calculaPrecoVenda()  {
-        return ((this.precoBase * this.duracao)/100);
+        return ((getPrecoBase() * this.duracao)/100);
     }
 
     @Override
