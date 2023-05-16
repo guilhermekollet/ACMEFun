@@ -76,10 +76,10 @@ public class Acervo {
     }
 
     /**
-     * @escreverInfomacoesIens
+     * @escreverInfomacoesItens
      * escreve algumas informações para cada item carregado com sucesso no sistema, no formato: 2;título;valor do preço final;valor do imposto
      */
-    public void escreverInfomacoesIens() {
+    public void escreverInfomacoesItens() {
 
         try(BufferedReader reader = Files.newBufferedReader(pathRd, Charset.defaultCharset())) {
             
@@ -155,4 +155,30 @@ public class Acervo {
         }
     }
 
+    /**
+    * @Escrever quantos games RPG foram cadastrados
+    * escreve a quantidade de games da categoria RPG que foram carregados no sistema no formato: 3;quantidade de games RPG
+    */
+    public void escreverRpgsCadastrados() {
+        try {
+            FileWriter writer = new FileWriter(pathWr.toFile(), true);
+            final int[] rpgsCadastrados = {0};
+            audiovisuais.forEach(a -> {
+                if(a instanceof Game) {
+                    
+                    Game g = (Game) a;
+                    if(g.getCategoria().equals("RPG")) {
+                        rpgsCadastrados[0]++;
+                    }
+                }
+            });
+
+            writer.write("3;" + rpgsCadastrados[0] + "\n");
+            writer.close();
+            
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever no arquivo.");
+            e.printStackTrace();
+        }
+    }
 }

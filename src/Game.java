@@ -8,6 +8,10 @@ public class Game extends AudioVisual {
         System.out.println("Criando game...");
         this.categoria = categoria;
     }
+
+    String getCategoria() {
+        return categoria;
+    }
     
     @Override
     public double calculaPrecoVenda() {
