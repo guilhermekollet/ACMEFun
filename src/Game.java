@@ -39,7 +39,7 @@ public class Game extends AudioVisual {
 
     @Override
     public double calculaImposto()  {
-        return 0.0;
+        return Math.round((calculaPrecoVenda() * 0.5) * 100.0) / 100.0;
     }
 
 }

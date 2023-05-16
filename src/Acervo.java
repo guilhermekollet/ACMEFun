@@ -59,7 +59,7 @@ public class Acervo {
             
             try {
                 FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv");
-                writer.write("1," + itensCarregados);
+                writer.write("1;" + itensCarregados + "\n");
                 writer.close();
                 System.out.println("Dados escritos com sucesso no arquivo.");
                 
@@ -109,15 +109,15 @@ public class Acervo {
                         try {
                             FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv", true);
                             
-                            writer.write("2," + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto());
+                            writer.write("2;" + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto() + "\n");
                             writer.close();
                             System.out.println("Dados escritos com sucesso no arquivo.");
+                            itensCarregados++;
                             
                         } catch (IOException e) {
                             System.out.println("Erro ao escrever no arquivo.");
                             e.printStackTrace();
                         }
-
                     }
 
                     else if(console[2].equals("2")) {
@@ -127,25 +127,20 @@ public class Acervo {
 
                         try {
                             FileWriter writer = new FileWriter("./ACMEFun/data/resultado.csv", true);
-                            
-                            writer.write("2," + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto());
+                            writer.write("2;" + a.getTitulo() + ";" + a.calculaPrecoVenda() + ";" + a.calculaImposto() + "\n");
                             writer.close();
                             System.out.println("Dados escritos com sucesso no arquivo.");
+                            itensCarregados++;
                             
                         } catch (IOException e) {
                             System.out.println("Erro ao escrever no arquivo.");
                             e.printStackTrace();
                         }
-
                     }
-
-                    
-                        
                 } else {
                     System.out.println("Erro ao cadastrar item!");
                     itensNaoCarregados++;
                 }
-
             }
 
             System.out.println("Quantidade de itens carregados: " + itensCarregados);

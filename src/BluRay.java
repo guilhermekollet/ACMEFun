@@ -14,7 +14,7 @@ public class BluRay extends AudioVisual {
 
     @Override
     public double calculaImposto()  {
-        return 0.0;
+        return Math.round((calculaPrecoVenda() * 0.4) * 100.0) / 100.0;
     }
 
 }
