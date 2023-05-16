@@ -181,4 +181,76 @@ public class Acervo {
             e.printStackTrace();
         }
     }
+
+    /**
+    * @Escrever o BluRay com imposto mais próximo da média
+    * calcula a média dos valores de imposto de BluRays carregados e escreve qual BluRay possui o valor de imposto mais próximo da média calculada, no formato: 4:média dos valores de impostos de BluRays;título do BluRay com imposto mais próximo da média. Caso não haja BluRays, escreve no formato: 4:Nenhum BluRay
+    */
+    public void escreverMediaBlurayProximo() {
+       
+        int qtdBluray = 0;
+        double mediaBluray = 0;
+
+        for(int i=0; i<audiovisuais.size(); i++) {
+
+            if(audiovisuais.get(i) instanceof BluRay) {
+                BluRay b = (BluRay) audiovisuais.get(i);
+                mediaBluray += b.calculaImposto();
+                qtdBluray++;
+            }
+        }
+
+        if(qtdBluray > 0) {
+
+            BluRay bluraySemelhante = null;
+
+            //Definição da média
+            mediaBluray = mediaBluray/qtdBluray;
+            
+            //Encontrar qual BluRay está mais próximo da média
+            for(int i=0; i<audiovisuais.size(); i++) {
+
+                if(audiovisuais.get(i) instanceof BluRay) {
+
+                    BluRay b = (BluRay) audiovisuais.get(i);
+                    
+                    if(Math.abs(b.calculaImposto() - mediaBluray) < Math.abs(bluraySemelhante.calculaImposto() - mediaBluray)) {
+                        bluraySemelhante = b;
+                    }
+                }
+            }
+    
+            try {
+
+                FileWriter writer = new FileWriter(pathWr.toFile(), true);
+                DecimalFormat decimalFormat = new DecimalFormat("#.00");
+                String mediaBlurayFormatado = decimalFormat.format(mediaBluray);
+                mediaBlurayFormatado = mediaBlurayFormatado.replace(",", ".");
+    
+                writer.write("4;" + mediaBlurayFormatado + ";" + bluraySemelhante.getTitulo());
+                writer.close();
+                
+            } catch (IOException e) {
+
+                System.out.println("Erro ao escrever no arquivo.");
+                e.printStackTrace();
+
+            }
+            
+        } else {
+
+            try {
+
+                FileWriter writer = new FileWriter(pathWr.toFile(), true);
+                writer.write("4:Nenhum BluRay");
+                writer.close();
+
+            } catch (IOException e) {
+
+                System.out.println("Erro ao escrever no arquivo.");
+                e.printStackTrace();
+
+            }
+        }
+    }     
 }

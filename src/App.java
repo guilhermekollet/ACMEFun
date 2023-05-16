@@ -26,6 +26,7 @@ public class App {
          * @Escrever o BluRay com imposto mais próximo da média
          * calcula a média dos valores de imposto de BluRays carregados e escreve qual BluRay possui o valor de imposto mais próximo da média calculada, no formato: 4:média dos valores de impostos de BluRays;título do BluRay com imposto mais próximo da média. Caso não haja BluRays, escreve no formato: 4:Nenhum BluRay
          */
+        acervo.escreverMediaBlurayProximo();
 
 
 
