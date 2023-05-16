@@ -10,13 +10,13 @@ abstract class AudioVisual implements Cobravel {
     @Override
     public double calculaPrecoVenda() {
         
-        return 0.0;
+        return 0.00;
     }
 
     @Override
     public double calculaImposto() {
         
-        return 0.0;
+        return 0.00;
     }
 
     public String getTitulo() {

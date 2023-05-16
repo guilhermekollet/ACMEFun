@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Game extends AudioVisual {
     String categoria;
 
@@ -8,38 +10,37 @@ public class Game extends AudioVisual {
     }
     
     @Override
-    public double calculaPrecoVenda()  {
-        
-        /*
-        * O preço de venda de um game
-        * É o preço base acrescido de um percentual sobre o preço base conforme a categoria: 20% se for ACAO; 30% se for ESPORTE; 40% se for ESTRATEGIA; 50% se for SIMULACAO ou 70% se for RPG.
-        return 0.0;
-        */
-
-        if (this.categoria == "ACAO") {
-            return (getPrecoBase() * 1.2);
+    public double calculaPrecoVenda() {
+        double precoVenda;
+    
+        switch (this.categoria) {
+            case "ACAO":
+                precoVenda = getPrecoBase() * 1.2;
+                break;
+            case "ESPORTE":
+                precoVenda = getPrecoBase() * 1.3;
+                break;
+            case "ESTRATEGIA":
+                precoVenda = getPrecoBase() * 1.4;
+                break;
+            case "SIMULACAO":
+                precoVenda = getPrecoBase() * 1.5;
+                break;
+            case "RPG":
+                precoVenda = getPrecoBase() * 1.7;
+                break;
+            default:
+                precoVenda = 0.0;
         }
-        else if (this.categoria == "ESPORTE") {
-            return (getPrecoBase() * 1.3);
-        }
-        else if (this.categoria == "ESTRATEGIA") {
-            return (getPrecoBase() * 1.4);
-        }
-        else if (this.categoria == "SIMULACAO") {
-            return (getPrecoBase() * 1.5);
-        }
-        else if (this.categoria == "RPG") {
-            return (getPrecoBase() * 1.7);
-        }
-        else {
-            return 0.0;
-        }
-
+    
+        return Math.round(precoVenda * 100.0) / 100.0;
     }
 
     @Override
-    public double calculaImposto()  {
-        return Math.round((calculaPrecoVenda() * 0.5) * 100.0) / 100.0;
+    public double calculaImposto() {
+        double imposto = Math.round((calculaPrecoVenda() * 0.5) * 100.0) / 100.0;
+    
+        return Math.round(imposto * 100.0) / 100.0;
     }
 
 }

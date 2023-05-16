@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class BluRay extends AudioVisual {
     private int duracao; //minutos
 
@@ -8,13 +10,20 @@ public class BluRay extends AudioVisual {
     }
 
     @Override
-    public double calculaPrecoVenda()  {
-        return ((getPrecoBase() * this.duracao)/100);
+    public double calculaPrecoVenda() {
+        double precoVenda = (getPrecoBase() * this.duracao) / 100;
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        String precoVendaString = decimalFormat.format(precoVenda).replace(",", ".");
+        
+        return Double.parseDouble(precoVendaString);
     }
-
+    
     @Override
-    public double calculaImposto()  {
-        return Math.round((calculaPrecoVenda() * 0.4) * 100.0) / 100.0;
+    public double calculaImposto() {
+        double precoImposto = (calculaPrecoVenda() * 0.4);
+        double precoImpostoArredondado = Math.round(precoImposto * 100.0) / 100.0;
+    
+        return precoImpostoArredondado;
     }
 
 }
