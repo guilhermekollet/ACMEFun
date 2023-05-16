@@ -5,25 +5,32 @@ public class BluRay extends AudioVisual {
 
     BluRay(String titulo, double precoBase, int duracao) {
         super(titulo, precoBase);
-        System.out.println("Criando BluRay...");
         this.duracao = duracao;
     }
 
     @Override
     public double calculaPrecoVenda() {
+
         double precoVenda = (getPrecoBase() * this.duracao) / 100;
+
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
         String precoVendaString = decimalFormat.format(precoVenda).replace(",", ".");
         
         return Double.parseDouble(precoVendaString);
+
     }
     
     @Override
     public double calculaImposto() {
+
         double precoImposto = (calculaPrecoVenda() * 0.4);
-        double precoImpostoArredondado = Math.round(precoImposto * 100.0) / 100.0;
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
+        String precoImpostoString = decimalFormat.format(precoImposto).replace(",", ".");
     
-        return precoImpostoArredondado;
+        return Double.parseDouble(precoImpostoString);
     }
 
 }

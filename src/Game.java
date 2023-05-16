@@ -5,7 +5,6 @@ public class Game extends AudioVisual {
 
     Game(String titulo, double precoBase, String categoria) {
         super(titulo, precoBase);
-        System.out.println("Criando game...");
         this.categoria = categoria;
     }
 
@@ -42,9 +41,13 @@ public class Game extends AudioVisual {
 
     @Override
     public double calculaImposto() {
-        double imposto = Math.round((calculaPrecoVenda() * 0.5) * 100.0) / 100.0;
+        double precoImposto = (calculaPrecoVenda() * 0.5);
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
+        String precoImpostoString = decimalFormat.format(precoImposto).replace(",", ".");
     
-        return Math.round(imposto * 100.0) / 100.0;
+        return Double.parseDouble(precoImpostoString);
     }
 
 }

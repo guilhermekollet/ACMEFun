@@ -9,61 +9,53 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Acervo {
+
     ArrayList<AudioVisual> audiovisuais = new ArrayList<AudioVisual>();
+
     Path pathRd = Paths.get("./ACMEFun/data/dados.csv");
     Path pathWr = Paths.get("./ACMEFun/data/resultado.csv");
-
-    public Acervo() {
-        System.out.println("Criando acervo...");
-    }
 
     /**
     * @lerAudioVisuais
     * Lê todos os dados de audiovisuais e escreve a quantidade de itens carregados com sucesso no formato: 1;quantidade de itens carregados
     */
     public void lerAudioVisuais() {
+
         try(BufferedReader reader = Files.newBufferedReader(pathRd, Charset.defaultCharset())) {
             
             String line = null;
-            int itensCarregados = 0;
-            int itensNaoCarregados = 0;
             String[] console;
+            int itensCarregados = 0;
 
             AudioVisual a;
 
             while ((line = reader.readLine()) != null) {
                 console = line.split(";");
-
-                //verifica se o quarto campo é um número
-                if(console[2].equals("1")) {
-                    a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
-                    System.out.println("BluRay criado com sucesso!");
-                    audiovisuais.add(a);
-                    itensCarregados++;
-                }
-                else if(console[2].equals("2")){
-                    a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
-                    System.out.println("Game criado com sucesso!");
-                    audiovisuais.add(a);
-                    itensCarregados++;
-                } 
-                else {
-                    System.out.println("Erro ao cadastrar item!");
-                    itensNaoCarregados++;
+            
+                switch (console[2]) {
+                    case "1":
+                        a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
+                        audiovisuais.add(a);
+                        itensCarregados++;
+                        break;
+                    case "2":
+                        a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
+                        audiovisuais.add(a);
+                        itensCarregados++;
+                        break;
+                    default:
+                        break;
                 }
             }
-
-            System.out.println("Quantidade de itens carregados: " + itensCarregados);
-            System.out.println("Quantidade de itens não carregados: " + itensNaoCarregados);
             
             try {
                 FileWriter writer = new FileWriter(pathWr.toString());
+                
                 writer.write("1;" + itensCarregados + "\n");
                 writer.close();
-                System.out.println("Dados escritos com sucesso no arquivo.");
                 
             } catch (IOException e) {
-                System.out.println("Erro ao escrever no arquivo.");
+                System.err.format("Erro de E/S: %s%n", e);
                 e.printStackTrace();
             }
 
@@ -79,13 +71,12 @@ public class Acervo {
      * @escreverInfomacoesItens
      * escreve algumas informações para cada item carregado com sucesso no sistema, no formato: 2;título;valor do preço final;valor do imposto
      */
-    public void escreverInfomacoesItens() {
+    public void escreverInformacoesItens() {
 
+        /*
         try(BufferedReader reader = Files.newBufferedReader(pathRd, Charset.defaultCharset())) {
             
             String line = null;
-            int itensCarregados = 0;
-            int itensNaoCarregados = 0;
             String[] console;
 
             AudioVisual a;
@@ -101,15 +92,16 @@ public class Acervo {
                         a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
 
                         try {
+
                             FileWriter writer = new FileWriter(pathWr.toFile(), true);
+
                             DecimalFormat decimalFormat = new DecimalFormat("#.00");
+                            
                             String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
                             String impostoFormatado = decimalFormat.format(a.calculaImposto());
                             
                             writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
                             writer.close();
-                            System.out.println("Dados escritos com sucesso no arquivo.");
-                            itensCarregados++;
                             
                         } catch (IOException e) {
                             System.out.println("Erro ao escrever no arquivo.");
@@ -120,49 +112,75 @@ public class Acervo {
                     else if(console[2].equals("2")) {
 
                         a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
-                        System.out.println("Game criado com sucesso!");
 
                         try {
+
                             FileWriter writer = new FileWriter(pathWr.toFile(), true);
 
                             DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
                             String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
                             String impostoFormatado = decimalFormat.format(a.calculaImposto());
                             
                             writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
                             writer.close();
-                            System.out.println("Dados escritos com sucesso no arquivo.");
-                            itensCarregados++;
                             
                         } catch (IOException e) {
+
                             System.out.println("Erro ao escrever no arquivo.");
                             e.printStackTrace();
+
                         }
                     }
-                } else {
-                    System.out.println("Erro ao cadastrar item!");
-                    itensNaoCarregados++;
                 }
             }
-
-            System.out.println("Quantidade de itens carregados: " + itensCarregados);
-            System.out.println("Quantidade de itens não carregados: " + itensNaoCarregados);
-
         }
         catch (IOException e) {
+
             System.err.format("Erro de E/S: %s%n", e);
 
         }
+        */
+        if(audiovisuais.size() > 0) {
+
+            AudioVisual a = null;
+           
+            DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
+            for(int i=0; i < audiovisuais.size(); i++) {
+
+                a = audiovisuais.get(i);
+                
+                try {
+
+                    FileWriter writer = new FileWriter(pathWr.toFile(), true);
+                    String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
+                    String impostoFormatado = decimalFormat.format(a.calculaImposto());
+                                            writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
+                    writer.close();
+                        
+                } catch (IOException e) {
+
+                    System.out.println("Erro ao escrever no arquivo.");
+                    e.printStackTrace();
+                }
+            }                
+        }
     }
+        
 
     /**
     * @Escrever quantos games RPG foram cadastrados
     * escreve a quantidade de games da categoria RPG que foram carregados no sistema no formato: 3;quantidade de games RPG
     */
     public void escreverRpgsCadastrados() {
+
         try {
+
             FileWriter writer = new FileWriter(pathWr.toFile(), true);
+            
             final int[] rpgsCadastrados = {0};
+            
             audiovisuais.forEach(a -> {
                 if(a instanceof Game) {
                     
@@ -177,8 +195,10 @@ public class Acervo {
             writer.close();
             
         } catch (IOException e) {
+
             System.out.println("Erro ao escrever no arquivo.");
             e.printStackTrace();
+
         }
     }
 
@@ -194,9 +214,11 @@ public class Acervo {
         for(int i=0; i<audiovisuais.size(); i++) {
 
             if(audiovisuais.get(i) instanceof BluRay) {
+
                 BluRay b = (BluRay) audiovisuais.get(i);
                 mediaBluray += b.calculaImposto();
                 qtdBluray++;
+
             }
         }
 
@@ -221,7 +243,9 @@ public class Acervo {
                     } else {
                     
                         if(Math.abs(b.calculaImposto() - mediaBluray) < Math.abs(bluraySemelhante.calculaImposto() - mediaBluray)) {
+                            
                             bluraySemelhante = b;
+
                         }
                     }
                 }
@@ -230,7 +254,9 @@ public class Acervo {
             try {
 
                 FileWriter writer = new FileWriter(pathWr.toFile(), true);
+
                 DecimalFormat decimalFormat = new DecimalFormat("#.00");
+                
                 String mediaBlurayFormatado = decimalFormat.format(mediaBluray);
                 mediaBlurayFormatado = mediaBlurayFormatado.replace(",", ".");
     

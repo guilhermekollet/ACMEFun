@@ -7,13 +7,11 @@ abstract class AudioVisual implements Cobravel {
         this.precoBase = precoBase;
     }
     
-    @Override
     public double calculaPrecoVenda() {
         
         return 0.00;
     }
 
-    @Override
     public double calculaImposto() {
         
         return 0.00;
