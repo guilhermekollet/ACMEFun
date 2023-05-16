@@ -213,9 +213,16 @@ public class Acervo {
                 if(audiovisuais.get(i) instanceof BluRay) {
 
                     BluRay b = (BluRay) audiovisuais.get(i);
-                    
-                    if(Math.abs(b.calculaImposto() - mediaBluray) < Math.abs(bluraySemelhante.calculaImposto() - mediaBluray)) {
+
+                    if(bluraySemelhante == null) {
+
                         bluraySemelhante = b;
+                    
+                    } else {
+                    
+                        if(Math.abs(b.calculaImposto() - mediaBluray) < Math.abs(bluraySemelhante.calculaImposto() - mediaBluray)) {
+                            bluraySemelhante = b;
+                        }
                     }
                 }
             }
