@@ -12,6 +12,7 @@ public class Acervo {
 
     ArrayList<AudioVisual> audiovisuais = new ArrayList<AudioVisual>();
 
+    //Endereços dos arquivos de entrada e saída
     Path pathRd = Paths.get("./ACMEFun/data/dados.csv");
     Path pathWr = Paths.get("./ACMEFun/data/resultado.csv");
 

@@ -12,7 +12,6 @@ public class Game extends AudioVisual {
         return categoria;
     }
     
-    @Override
     public double calculaPrecoVenda() {
         double precoVenda;
     
@@ -39,7 +38,6 @@ public class Game extends AudioVisual {
         return Math.round(precoVenda * 100.0) / 100.0;
     }
 
-    @Override
     public double calculaImposto() {
         double precoImposto = (calculaPrecoVenda() * 0.5);
 

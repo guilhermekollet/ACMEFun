@@ -8,7 +8,6 @@ public class BluRay extends AudioVisual {
         this.duracao = duracao;
     }
 
-    @Override
     public double calculaPrecoVenda() {
 
         double precoVenda = (getPrecoBase() * this.duracao) / 100;
@@ -21,7 +20,6 @@ public class BluRay extends AudioVisual {
 
     }
     
-    @Override
     public double calculaImposto() {
 
         double precoImposto = (calculaPrecoVenda() * 0.4);
