@@ -73,74 +73,6 @@ public class Acervo {
      */
     public void escreverInformacoesItens() {
 
-        /*
-        try(BufferedReader reader = Files.newBufferedReader(pathRd, Charset.defaultCharset())) {
-            
-            String line = null;
-            String[] console;
-
-            AudioVisual a;
-
-            while ((line = reader.readLine()) != null) {
-
-                console = line.split(";");
-
-                if(console.length == 4) {
-                    
-                    if(console[2].equals("1")) {
-
-                        a = new BluRay(console[0], Double.parseDouble(console[1]), Integer.parseInt(console[3]));
-
-                        try {
-
-                            FileWriter writer = new FileWriter(pathWr.toFile(), true);
-
-                            DecimalFormat decimalFormat = new DecimalFormat("#.00");
-                            
-                            String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
-                            String impostoFormatado = decimalFormat.format(a.calculaImposto());
-                            
-                            writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
-                            writer.close();
-                            
-                        } catch (IOException e) {
-                            System.out.println("Erro ao escrever no arquivo.");
-                            e.printStackTrace();
-                        }
-                    }
-
-                    else if(console[2].equals("2")) {
-
-                        a = new Game(console[0], Double.parseDouble(console[1]), console[3]);
-
-                        try {
-
-                            FileWriter writer = new FileWriter(pathWr.toFile(), true);
-
-                            DecimalFormat decimalFormat = new DecimalFormat("#.00");
-
-                            String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
-                            String impostoFormatado = decimalFormat.format(a.calculaImposto());
-                            
-                            writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
-                            writer.close();
-                            
-                        } catch (IOException e) {
-
-                            System.out.println("Erro ao escrever no arquivo.");
-                            e.printStackTrace();
-
-                        }
-                    }
-                }
-            }
-        }
-        catch (IOException e) {
-
-            System.err.format("Erro de E/S: %s%n", e);
-
-        }
-        */
         if(audiovisuais.size() > 0) {
 
             AudioVisual a = null;
@@ -154,17 +86,34 @@ public class Acervo {
                 try {
 
                     FileWriter writer = new FileWriter(pathWr.toFile(), true);
+                    
                     String precoVendaFormatado = decimalFormat.format(a.calculaPrecoVenda());
                     String impostoFormatado = decimalFormat.format(a.calculaImposto());
-                                            writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
+                    
+                    writer.write("2;" + a.getTitulo() + ";" + precoVendaFormatado.replace(",", ".") + ";" + impostoFormatado.replace(",", ".") + "\n");
                     writer.close();
                         
                 } catch (IOException e) {
 
                     System.out.println("Erro ao escrever no arquivo.");
                     e.printStackTrace();
+
                 }
             }                
+        } else {
+
+            try {
+
+                FileWriter writer = new FileWriter(pathWr.toFile(), true);
+                writer.write("\n" + "2;Nenhum item carregado no sistema" + "\n");
+                writer.close();
+                    
+            } catch (IOException e) {
+
+                System.out.println("Erro ao escrever no arquivo.");
+                e.printStackTrace();
+
+            }
         }
     }
         
@@ -275,7 +224,7 @@ public class Acervo {
             try {
 
                 FileWriter writer = new FileWriter(pathWr.toFile(), true);
-                writer.write("4:Nenhum BluRay");
+                writer.write("4;Nenhum BluRay");
                 writer.close();
 
             } catch (IOException e) {

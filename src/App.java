@@ -20,13 +20,13 @@ public class App {
          * @Escrever quantos games RPG foram cadastrados
          * escreve a quantidade de games da categoria RPG que foram carregados no sistema no formato: 3;quantidade de games RPG
          */
-        //acervo.escreverRpgsCadastrados();
+        acervo.escreverRpgsCadastrados();
 
         /**
          * @Escrever o BluRay com imposto mais próximo da média
          * calcula a média dos valores de imposto de BluRays carregados e escreve qual BluRay possui o valor de imposto mais próximo da média calculada, no formato: 4:média dos valores de impostos de BluRays;título do BluRay com imposto mais próximo da média. Caso não haja BluRays, escreve no formato: 4:Nenhum BluRay
          */
-        //acervo.escreverMediaBlurayProximo();
+        acervo.escreverMediaBlurayProximo();
 
 
 
